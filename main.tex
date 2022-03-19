@@ -1,0 +1,116 @@
+\input{formats/diploma.tex}
+
+\usepackage[utf8]{inputenc}                % Кодировка
+\usepackage[british]{babel}  % Русский язык
+\usepackage[pdftex]{graphicx}              % Картинки
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\begin{document}
+    \input{title_page/doc.tex}
+    \tableofcontents
+    \clearpage
+    \section{Introduction}
+    In this paper, the definition of the problem of optimal control synthesis is given. Methods for constructing a mathematical model to describe the system and types of possible solutions are described, various problem formulations are compared, and the current status of research for the above types of problems is given.
+    For the basic formulation of the problem, classical solution methods are given, their positive and negative sides, suitability for use, and the possibility of using computer power to synthesize the solution are described.
+
+    \section{Optimal Control Problem Overview}
+    Optimal control is the problem of designing a system that provides for a given control object or process a control law, or a control sequence of actions, that guarantee the maximum or minimum of a given set of system quality criteria.
+    The optimal control problem includes the calculation of the optimal control program and the synthesis of the optimal control system.
+    Optimal control programs, as a rule, are calculated by numerical analysis iterative algorithms for finding the extremum of a functional, or solving a boundary value problem for a system of differential equations.
+    From a mathematical point of view, the synthesis of optimal control systems is a non-linear programming problem in functional spaces.
+
+
+    To solve the problem of determining the optimal control program, a mathematical model of a controlled object or process is constructed that describes its behavior over time under the influence of control actions and its own current state.
+    If the mathematical model of the control object or process is not known in advance, then to determine it, it is necessary to carry out the procedure for identifying the control object or process.
+    The mathematical model for the optimal control problem includes:
+    \parskip -0.5em
+    \begin{itemize}
+        \item the formulation of the control goal, expressed through the control quality criterion;
+        \item definition of differential or difference equations, describing possible ways of movement of the control object;
+        \item determination of restrictions on the resources used in the form of equations or inequalities.
+    \end{itemize}
+    With optimal control of hierarchical multilevel systems, for example, large chemical industries, metallurgical and energy complexes, multipurpose and multilevel hierarchical systems of optimal control are used.
+    The mathematical model introduces criteria for the quality of control for each level of control and for the entire system as a whole, as well as coordination of actions between levels of control.
+    \parskip 1em
+
+    Traditionally, according to the form of response to the task, the synthesized controls are divided into program and positional (in the literature it is often found as strategies).
+    Program controls depend only on time and describe the total impact on a given system over the entire time interval.
+    Positional ones, on the other hand, are the law of time and the current position.
+    Although both of these types are reducible to each other and thus are equivalent at least in the deterministic case, the task of such a translation is algorithmically complex, and various methods of synthesis conceptually require a specific definition of the type of control.
+    At the same time, the construction of program controls under conditions of uncertainty, random phase restrictions, increased requirements for robustness or any other assumptions describing the real world seems meaningless for practical use, due to the impossibility of applying the basic principles of correction and aiming. 
+
+    Further description will be carried out for continuous deterministic models, since work with stochastic and discrete models, of course, differs in mathematical technique, but is identical in terms of the principles, postulates and methods underlying all these studies.
+    According to the form of the problem condition (the form of a mathematical model describing the control object or process), they are divided into a problem with lumped parameters and a problem with distributed parameters.
+    
+    The mathematical model underlying the lumped problem is a system of ordinary differential equations.
+    This model is basic in the sense that most of the simple processes can be easily described by it: the movement of a car, the population waves of animals, the economic processes of resource distribution, the formation of prices for derivative financial instruments, and others.
+    This problem has been well studied: today we have the necessary optimality conditions for any problem, and a lot of studied special cases with sufficient conditions or constructed controls.
+    Examples of a well-studied particular case include the problem of finding a linear-quadratic controller, elegantly reduced by Gauss to solving the matrix Ricatti equation, as well as the problem of dynamic programming under ellipsoidal constraints, for which the head of our department Academician Kurzhansky received one of his two Lenin Prizes.
+
+    The problem with distributed parameters is described by partial differential equations and describes complex processes, usually in spaces of relatively small dimension.
+    Often these are physical, chemical or ecological processes in which a distributed nature is obviously embedded.
+    Examples of processes described by the distributed model: continuous heating furnace, heat exchanger, coating plant, dryer, chemical reactor, mixture separation plant, blast furnace or open hearth furnace, coke oven battery, rolling mill, induction heating furnace.
+    The distributed problem, due to the complexity of the mathematical apparatus used, is much less studied.
+    The theory is poorly developed only for certain types of equations: elliptic, parabolic and hyperbolic.
+    In most cases, results in this area are proofs of weak analogues of theorems and principles that have already been proven and successfully applied to solve the previous problem. 
+
+    The next section will describe the main basic methods for solving an optimal programming problem, all the terms used below are suitable for any problem, but we most accurately describe a continuous deterministic problem with lumped parameters.
+
+    \section{Solution Methods}
+    \subsection{Calculus of Variations}
+    In this method, we consider the problem of optimal control synthesis as a Lagrange problem of the calculus of variations.
+    To find the necessary extremum conditions, the Euler-Lagrange theorem is used, which introduces a Lagrange function that depends on time, position, derivative of position, and control.
+    The necessary conditions for an extremum, according to this theorem, have the form: stationarity of the Lagrange function with respect to control; stationarity of the Lagrange function in position due to the original system; and transversality of the Lagrange function in position.
+
+    The calculus of variations is well studied and is used in many branches of mathematics.
+    There are specific numerical methods that allow you to calculate the optimal control using a computer and an intelligent programmer.
+
+    However, the problem arises with a more detailed consideration of the first of the necessary conditions.
+    The condition of stationarity with respect to control does not follow from the mathematical model and is extremely rare.
+    So, in physical applications, the sum of potential and kinetic energies is often taken as the Lagrange function, in which case the only possible trajectories of a controlled object located on the Earth will be its orbit.
+
+    The following method resolves this misunderstanding.
+
+    \subsection{Pontryagin Maximum Principle}
+    The method developed by Pontryagin replaces the control stationarity condition with the Hamilton-Pontryagin condition, in which, in addition to the parameters and phase variables of the original problem, similar value of the adjoint problem are used.
+    Despite the increase in the phase space by a factor of two, we have obtained the universal necessary conditions.
+
+    The necessary conditions allow using a computer to find a quasi-optimal one by a complete enumeration over the set of controls that satisfy the necessary conditions.
+    In fact, it will never be possible to find the optimal in the classical sense, because in the general case, the enumeration is carried out over a continuum set of controls.
+
+    A high algorithmic complexity is also represented by enumeration over an infinite interval or enumeration over a multidimensional grid.
+    Moreover, such tasks are encountered in real life. Now, for each individual problem, it is necessary to prove a number of statements in order to somehow reduce the computational complexity.
+    Parallel programming techniques are often used to reduce iteration time.
+
+    \subsection{Dynamic Programming Method}
+    The dynamic programming method is based on the Bellman optimality principle.
+    The principle is formulated as follows: the optimal control strategy has the property that whatever the initial state and control at the beginning of the process, subsequent controls are relative to the state obtained after the initial stage of the process.
+
+    This idea allows solving the problem from the end, and gives a clear solution algorithm for discrete difference equations.
+    The Bellman--Ford algorithm, which is a consequence of the above principle, is actively used today for the functioning of the Internet and other areas that use graphs.
+    Such ease of use and the relative small algorithmic complexity of the Bellman--Ford algorithm make it tempting to always reduce a continuous problem to a discrete form.
+
+    On the other hand, continuous equations have their own mathematical apparatus for research.
+    These studies make it possible to find solutions that are trivial from an algorithmic point of view for a large number of special cases.
+    The basis for the continuous model is the Hamilton--Jacobi--Bellman equation, as well as the verification theorem, which states that the cost function involved in the Hamilton--Jacobi--Bellman equation is the only solution to the problem under given conditions.
+
+    Thus, we have a complex equation that is not clear how to solve, but if we find something by selection, then this value will be correct.
+    This approach to development causes a large number of known special cases.
+
+    \section{Conclusion}
+    Solving the optimal control problem is very important for minimizing various costs.
+    Different formulations of the problem imply the use of different mathematical models, which are studied to varying degrees, but suggest the same principles of solution.
+    The main steps in the search for a solution were made independently by Pontryagin and Bellman, and they walked in different directions. The Pontryagin method is a universal tool that cannot be applied.
+    The Bellman method is not universal, but it is widely used.
+    We looked at the possibilities of each of them, and saw in them the relevance and opportunities for new discoveries.
+    
+    \begin{thebibliography}{9}
+        \bibitem{} Bellman,R. DYNAMIC PROGRAMMING. Princeton University Press, New Jersey, 1957.
+        \bibitem{} Kirk, D. E. OPTIMAL CONTROL THEORY: AN INTRODUCTION. Prentice Hall, 1970.
+        \bibitem{} Ross, I. M. PONTRYAGIN'S PRINCIPLE, in Ch.2 of A Primer on Pontryagin's Principle in Optimal Control, Collegiate Publishers, San Francisco, 2015.
+    \end{thebibliography}
+\end{document}
+
+
