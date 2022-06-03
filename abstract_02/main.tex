@@ -162,14 +162,14 @@
 
     \textit{Bellman--Ford algorithm.}
     Based on the principles of dynamic programming, this algorithm is the only one of the second type in this list.
-    His idea is to sequentially recalculate labels for all graph nodes without exception until the optimal path value is found.
+    Its idea is to sequentially recalculate labels for all graph nodes without exception until the optimal path value is found.
     It is proved that it is enough to make as many iterations as there are nodes in the graph to stop.
     This algorithm allows you to set negative distances, cycles, and also indicates the presence of a negative cycle, if it is present in the graph.
     Stops from using this algorithm its large quadratic algorithmic complexity.
 
     In this case, the algorithm is based on principles that are applied in areas of mathematics other than discrete, in particular, optimal control.
     Moreover, there are similar results for continuous cases.
-    This allows us to consider the Bellman-Ford algorithm as an independent subject of study, and attempts to use it to connect the continuous world with a discrete mathematical model inside a computer.
+    This allows us to consider the Bellman--Ford algorithm as an independent subject of study, and attempts to use it to connect the continuous world with a discrete mathematical model inside a computer.
 
     \textit{Using quasi-sorted lists to store a list of unvisited vertices.}
     If each of the vertices considered at this iteration is added to the beginning or end (middle) of the list of unvisited vertices, depending on some condition, then it is possible to predictably reduce the search time for the minimum in this data structure.
@@ -203,8 +203,8 @@
     \textit{Johnson algorithm.}
     The algorithm runs Dijkstra's algorithm discussed above for each of the vertices of the graph.
     Usually, before using the main process on the graph, the Bellman--Ford algorithm is run with a fictitious starting vertex to determine the presence of negative edges that Dijkstra's algorithm cannot work with.
-    In the case of found negative edges, it is required to replace the lengths of edges in accordance with the lemma on changing the lengths of edges in a weighted graph, and such a replacement is carried out for each edge separately using the shortest weights from a fictitious vertex previously calculated by the Bellman-Ford algorithm.
-    Johnson's algorithm is the most productive algorithm to date.
+    In the case of found negative edges, it is required to replace the lengths of edges in accordance with the lemma on changing the lengths of edges in a weighted graph, and such a replacement is carried out for each edge separately using the shortest weights from a fictitious vertex previously calculated by the Bellman--Ford algorithm.
+    Johnson's algorithm is the most productive algorithm today.
     Its complexity can be computed as linear times the complexity of Dijkstra's algorithm (depending on the specific implementation).
     
     
